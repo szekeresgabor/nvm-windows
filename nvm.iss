@@ -311,7 +311,7 @@ begin
 end;
 
 [Run]
-Filename: "{cmd}"; Parameters: "/C ""mklink /H ""{code:getSymLink}"" ""{code:getCurrentVersion}"""" "; Check: isNodeAlreadyInUse; Flags: runhidden;
+Filename: "{cmd}"; Parameters: "/C ""mklink /J ""{code:getSymLink}"" ""{code:getCurrentVersion}"""" "; Check: isNodeAlreadyInUse; Flags: runhidden;
 
 [UninstallDelete]
 Type: files; Name: "{app}\nvm.exe";

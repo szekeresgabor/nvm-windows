@@ -407,7 +407,7 @@ func use(version string, cpuarch string) {
   }
 
   // Create new symlink
-  if !runElevated(fmt.Sprintf(`"%s" cmd /C mklink /H "%s" "%s"`,
+  if !runElevated(fmt.Sprintf(`"%s" cmd /C mklink /J "%s" "%s"`,
     filepath.Join(env.root, "elevate.cmd"),
     filepath.Clean(env.symlink),
     filepath.Join(env.root, "v"+version))) {
