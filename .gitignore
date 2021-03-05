@@ -25,6 +25,7 @@ _testmain.go
 
 dist
 src/v*
+src/pkg/*
 bin/*.exe
 !bin/buildtools/*
 bin/*.zip
