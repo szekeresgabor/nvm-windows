@@ -23,8 +23,9 @@ AppPublisher={#MyAppPublisher}
 AppPublisherURL={#MyAppURL}
 AppSupportURL={#MyAppURL}
 AppUpdatesURL={#MyAppURL}
-DefaultDirName={userappdata}\{#MyAppShortName}
+DefaultDirName={param:installdir|{userappdata}\{#MyAppShortName}} 
 DisableDirPage=no
+UsePreviousAppDir=no
 DefaultGroupName={#MyAppName}
 AllowNoIcons=yes
 LicenseFile={#ProjectRoot}\LICENSE
@@ -44,6 +45,9 @@ Name: "english"; MessagesFile: "compiler:Default.isl"
 
 [Tasks]
 Name: "quicklaunchicon"; Description: "{cm:CreateQuickLaunchIcon}"; GroupDescription: "{cm:AdditionalIcons}"; Flags: unchecked; OnlyBelowVersion: 0,6.1
+
+[Dirs]
+Name: DefaultDirName; Permissions: everyone-full
 
 [Files]
 Source: "{#ProjectRoot}\bin\*"; DestDir: "{app}"; BeforeInstall: PreInstall; Flags: ignoreversion recursesubdirs createallsubdirs; Excludes: "{#ProjectRoot}\bin\install.cmd"
@@ -193,7 +197,7 @@ begin
     'Select the folder in which Setup should create the symlink, then click Next.',
     False, '');
   SymlinkPage.Add('This directory will automatically be added to your system path.');
-  SymlinkPage.Values[0] := ExpandConstant('{pf}\nodejs');
+  SymlinkPage.Values[0] := ExpandConstant('{param:nodejsdir|{pf}\nodejs}');
 end;
 
 function InitializeUninstall(): Boolean;
