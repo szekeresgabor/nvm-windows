@@ -6,6 +6,7 @@ REM SET GOPATH=%CD%\src
 SET GOBIN=%CD%\bin
 REM Support for older architectures
 SET GOARCH=386
+set AppVersion=1.1.8
 
 REM Cleanup existing build if it exists
 if exist src\nvm.exe (
@@ -17,7 +18,7 @@ go env -w  GO111MODULE=off
 
 REM Make the executable and add to the binary directory
 echo Building nvm.exe
-go build src\nvm.go
+go build -ldflags="-X main.NvmVersion=%AppVersion%" src\nvm.go
 
 REM Group the file with the helper binaries
 move nvm.exe "%GOBIN%"
@@ -25,8 +26,6 @@ move nvm.exe "%GOBIN%"
 REM Codesign the executable
 .\buildtools\signtools\x64\signtool.exe sign /debug /tr http://timestamp.digicert.com /td sha256 /fd sha256 /a "%GOBIN%\nvm.exe"
 
-
-for /f %%i in ('"%GOBIN%\nvm.exe" version') do set AppVersion=%%i
 echo nvm.exe v%AppVersion% built.
 
 REM Create the distribution folder

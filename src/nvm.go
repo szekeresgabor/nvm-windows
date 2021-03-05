@@ -20,9 +20,7 @@ import (
   "github.com/olekukonko/tablewriter"
 )
 
-const (
-  NvmVersion = "1.1.8"
-)
+var NvmVersion = "development"
 
 type Environment struct {
   settings        string
